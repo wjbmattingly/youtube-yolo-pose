@@ -15,28 +15,19 @@ def load_model():
 
 yolo_nas_pose = load_model()
 
-# Modified prediction function
 def make_prediction(uploaded_file, confidence=0.55):
-    """
-    Make a prediction using the fixed model and device, and return the image with predictions.
-
-    Args:
-    - uploaded_file: Streamlit UploadedFile object.
-    - confidence (float, optional): Confidence threshold. Defaults to 0.75.
-
-    Returns:
-    - PIL.Image: Image with predictions.
-    """
-    # Convert the UploadedFile to a PIL Image
     image = Image.open(io.BytesIO(uploaded_file.getvalue()))
-
     np_image = np.array(image)
 
+    predictions = yolo_nas_pose.predict(np_image, conf=confidence)
 
-    yolo_nas_pose.predict(np_image, conf=confidence).save("")
+    if hasattr(predictions, '_images_prediction_lst') and len(predictions._images_prediction_lst) > 0:
+        # Use the 'draw' method to draw the predictions on the image
+        predicted_image = predictions._images_prediction_lst[0].draw()
+        return predicted_image
+    else:
+        raise ValueError
 
-    predictions = Image.open("pred_0.jpg")
-    return predictions
 
 
 # Streamlit UI
