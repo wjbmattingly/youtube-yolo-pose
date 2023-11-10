@@ -30,9 +30,9 @@ def make_prediction(uploaded_file, confidence=0.55):
     image = Image.open(io.BytesIO(uploaded_file.getvalue()))
 
 
-    yolo_nas_pose.predict(image, conf=confidence).save("temp")
+    yolo_nas_pose.predict(image, conf=confidence).save("")
 
-    predictions = Image.open("temp/pred_0.jpg")
+    predictions = Image.open("pred_0.jpg")
     return predictions
 
 
