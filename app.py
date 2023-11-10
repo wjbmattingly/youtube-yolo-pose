@@ -1,11 +1,9 @@
 import streamlit as st
 from super_gradients.training import models
 from super_gradients.common.object_names import Models
-import torch
-import pathlib
 from PIL import Image
+import torch
 import io
-import tempfile
 
 # Load the model
 @st.cache_resource
