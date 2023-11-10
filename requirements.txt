@@ -1,2 +1,1 @@
 super-gradients
-libgl1-mesa-glx
