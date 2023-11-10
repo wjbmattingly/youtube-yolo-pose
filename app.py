@@ -4,6 +4,7 @@ from super_gradients.common.object_names import Models
 from PIL import Image
 import torch
 import io
+import numpy as np
 
 # Load the model
 @st.cache_resource
@@ -29,8 +30,10 @@ def make_prediction(uploaded_file, confidence=0.55):
     # Convert the UploadedFile to a PIL Image
     image = Image.open(io.BytesIO(uploaded_file.getvalue()))
 
+    np_image = np.array(image)
 
-    yolo_nas_pose.predict(image, conf=confidence).save("")
+
+    yolo_nas_pose.predict(np_image, conf=confidence).save("")
 
     predictions = Image.open("pred_0.jpg")
     return predictions
