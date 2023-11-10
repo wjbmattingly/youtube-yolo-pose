@@ -17,6 +17,7 @@ yolo_nas_pose = load_model()
 
 def make_prediction(uploaded_file, confidence=0.55):
     image = Image.open(io.BytesIO(uploaded_file.getvalue()))
+    st.write(image)
     np_image = np.array(image)
     st.write(np_image.shape)
     st.write(np_image.dtype)
